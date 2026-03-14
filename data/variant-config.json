@@ -1,7 +1,7 @@
 {
   "experiment_id": "exp-2026-03-14",
-  "started_at": "2026-03-14T07:51:41.489030+00:00",
-  "hypothesis": "This experiment tests whether a LOSS AVERSION frame ('you're losing sales right now') converts better than the current CONVENIENCE frame ('order anytime') because loss aversion produces ~2x the psychological response of equivalent gains (Kahneman), and vendors viscerally feel the pain of missed sales on non-market days. The entire page narrative shifts from 'here's a nice option' to 'you're actively bleeding revenue \u2014 stop it in 15 minutes.'",
+  "started_at": "2026-03-14T12:03:59.933900+00:00",
+  "hypothesis": "This experiment tests whether a LOSS AVERSION frame ('Stop Losing Sales') converts better than the current ENABLEMENT frame ('Let Your Customers Order Anytime') because loss aversion is ~2x more motivating than equivalent gains (Kahneman/Tversky), and these vendors already feel the pain of customers asking to order between markets \u2014 naming that lost revenue should create urgency to act. Secondary test: price-anchored CTA ('Get Your $10/mo Store') vs action-generic CTA ('Start Selling Today') to reduce perceived risk at the click moment.",
   "swaps": [
     {
       "key": "hero_headline",
@@ -11,17 +11,17 @@
     {
       "key": "hero_subheadline",
       "baseline": "Set up a simple online storefront in minutes. Your customers browse your products, place orders, and pick up on your schedule.",
-      "challenger": "Every day without online ordering, your regulars can't buy from you. Get a simple storefront live in 15 minutes."
+      "challenger": "Your regulars already want to order online. A simple $10/mo storefront \u2014 live in 15 minutes."
     },
     {
       "key": "mid_page_hook",
       "baseline": "Your customers want to buy from you between markets. Now they can.",
-      "challenger": "Every week without a storefront, you're leaving money on the table."
+      "challenger": "Every market day ends. Your sales don\u2019t have to."
     },
     {
       "key": "cta_button_text",
       "baseline": "Start Selling Today",
-      "challenger": "See Your Store in 5 Minutes"
+      "challenger": "Get Your $10/mo Store"
     }
   ]
 }
