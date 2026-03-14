@@ -1,0 +1,46 @@
+name: Landing Page Optimization
+
+on:
+  schedule:
+    - cron: "0 6 * * *"  # Daily at 6am UTC
+  workflow_dispatch:  # manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run optimizer
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GA4_SERVICE_ACCOUNT_JSON: ${{ secrets.GA4_SERVICE_ACCOUNT_JSON }}
+          GA4_PROPERTY_ID: "427786646"
+        run: python orchestrator.py
+
+      - name: Commit results
+        run: |
+          git config user.name "lp-optimizer[bot]"
+          git config user.email "bot@users.noreply.github.com"
+          git add -f config/baseline.md data/active_experiment.json data/variant-config.json
+          git add results/results.log results/experiments/ results/learnings.md 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "exp $(date +%Y-%m-%d): auto-optimize"
+          git push
