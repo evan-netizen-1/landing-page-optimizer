@@ -1,1 +1,12 @@
-{}
+{
+  "experiment_id": "exp-2026-03-14",
+  "started_at": "2026-03-14T07:51:41.489389+00:00",
+  "hypothesis": "This experiment tests whether a LOSS AVERSION frame ('you're losing sales right now') converts better than the current CONVENIENCE frame ('order anytime') because loss aversion produces ~2x the psychological response of equivalent gains (Kahneman), and vendors viscerally feel the pain of missed sales on non-market days. The entire page narrative shifts from 'here's a nice option' to 'you're actively bleeding revenue \u2014 stop it in 15 minutes.'",
+  "elements_changed": "hero_headline, hero_subheadline, mid_page_hook, cta_button_text",
+  "challenger_copy": {
+    "hero_headline": "Stop Losing Sales Between Markets",
+    "hero_subheadline": "Every day without online ordering, your regulars can't buy from you. Get a simple storefront live in 15 minutes.",
+    "mid_page_hook": "Every week without a storefront, you're leaving money on the table.",
+    "cta_button_text": "See Your Store in 5 Minutes"
+  }
+}
