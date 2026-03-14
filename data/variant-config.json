@@ -34,7 +34,20 @@
     "one_link_desc": "[data-w-id=\"ce5b1b7e-3ce6-93f8-bd96-a1de81daf40e\"]",
     "cta_button_1": "[data-w-id=\"7341f29e-8b06-6659-f639-a254ad431094\"]",
     "cta_button_2": "[data-w-id=\"7341f29e-8b06-6659-f639-a254ad431096\"]",
-    "comparison_heading": "[data-w-id=\"9fdd557d-7bb2-76b8-cbca-7e715e3e3433\"]"
+    "comparison_heading": "[data-w-id=\"9fdd557d-7bb2-76b8-cbca-7e715e3e3433\"]",
+    "comparison_other_heading": "[data-w-id=\"d7a80775-4f76-a888-7dec-833d3cedf385\"]",
+    "comparison_other_1": "[data-w-id=\"b00d6090-5d25-29e6-3e40-8c03c50c4844\"]",
+    "comparison_other_2": "[data-w-id=\"278a0502-8551-54f7-865f-f6a51c14af18\"]",
+    "comparison_other_3": "[data-w-id=\"0257b62c-ac8a-2ca8-b72d-1df95e025030\"]",
+    "comparison_other_4": "[data-w-id=\"c5e64ba3-38ef-fd10-cac2-e39401021289\"]",
+    "comparison_other_5": "[data-w-id=\"e74c23e3-1adf-5afe-cd08-c7187f25398e\"]",
+    "comparison_other_6": "[data-w-id=\"e6a5d8b1-c5b3-52ef-1932-be0dd2868898\"]",
+    "comparison_other_7": "[data-w-id=\"8e5bf218-6054-f6aa-3ebe-8ef863ee142d\"]",
+    "comparison_other_8": "[data-w-id=\"9fc1799c-f274-a892-3661-40654ab4e1c2\"]",
+    "section_setup_bullet_1": "[data-w-id=\"c67c15fb-fa6b-a958-36da-3d6c7d79c871\"]",
+    "section_setup_bullet_2": "[data-w-id=\"c67c15fb-fa6b-a958-36da-3d6c7d79c875\"]",
+    "section_setup_bullet_3": "[data-w-id=\"c67c15fb-fa6b-a958-36da-3d6c7d79c879\"]",
+    "section_setup_bullet_4": "[data-w-id=\"c67c15fb-fa6b-a958-36da-3d6c7d79c87d\"]"
   },
   "baseline": {},
   "challenger": null

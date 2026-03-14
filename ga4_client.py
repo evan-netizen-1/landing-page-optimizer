@@ -136,12 +136,31 @@ def _query_event_by_variant(
         )
     )
 
+    # Combine with page_path filter if provided
+    if page_path:
+        page_filter = FilterExpression(
+            filter=Filter(
+                field_name="pagePath",
+                string_filter=Filter.StringFilter(
+                    value=page_path,
+                    match_type=Filter.StringFilter.MatchType.CONTAINS,
+                ),
+            )
+        )
+        combined_filter = FilterExpression(
+            and_group=FilterExpression.AndGroup(
+                expressions=[event_filter, page_filter]
+            )
+        )
+    else:
+        combined_filter = event_filter
+
     request = RunReportRequest(
         property=property_name,
         date_ranges=[DateRange(start_date=start_date, end_date=end_date)],
         dimensions=dimensions,
         metrics=metrics,
-        dimension_filter=event_filter,
+        dimension_filter=combined_filter,
     )
 
     response = client.run_report(request)

@@ -531,7 +531,7 @@ Rules for the JSON:
     response = client.messages.create(
         model="claude-opus-4-6",
         max_tokens=16000,
-        thinking={"type": "enabled", "budget_tokens": 10000},
+        thinking={"type": "adaptive"},
         messages=[{"role": "user", "content": prompt}],
     )
 
