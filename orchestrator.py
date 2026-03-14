@@ -369,11 +369,12 @@ def _promote_challenger(experiment: dict):
 
 def _reset_variant_config():
     """Reset variant-config.json to baseline-only (no challenger)."""
-    config = json.loads(VARIANT_CONFIG_FILE.read_text())
-    config["experiment_id"] = None
-    config["started_at"] = None
-    config["hypothesis"] = None
-    config["challenger"] = None
+    config = {
+        "experiment_id": None,
+        "started_at": None,
+        "hypothesis": None,
+        "swaps": None,
+    }
     VARIANT_CONFIG_FILE.write_text(json.dumps(config, indent=2))
     log.info("Reset variant-config.json (no active challenger).")
 
@@ -607,35 +608,59 @@ def _validate_challenger(challenger_copy: dict):
 # PHASE 3: DEPLOY
 # ─────────────────────────────────────────────
 
+def _load_baseline_text_map() -> dict:
+    """Parse baseline.md into a dict of {key: text_value}."""
+    result = {}
+    baseline = BASELINE_FILE.read_text()
+    for line in baseline.split("\n"):
+        line = line.strip()
+        if ": " in line and not line.startswith("#"):
+            key, value = line.split(": ", 1)
+            # Strip quotes
+            value = value.strip().strip('"').strip("'")
+            if key and value:
+                result[key] = value
+    return result
+
+
 def phase_deploy(challenger: dict, dry_run: bool = False):
     """Deploy the challenger by updating variant-config.json.
 
-    The ab-test.js script on /signup fetches this file on each page load.
+    Builds a swaps array: [{baseline: "old text", challenger: "new text"}, ...]
+    The ab-test.js script finds elements by baseline text and swaps them.
     """
-    # Load current variant config (has selectors)
-    config = json.loads(VARIANT_CONFIG_FILE.read_text())
+    challenger_copy = dict(challenger["challenger_copy"])
+    baseline_map = _load_baseline_text_map()
 
-    # Map challenger_copy keys to the config
-    challenger_copy = challenger["challenger_copy"]
-
-    # Handle cta_button_text → apply to both CTA buttons
+    # Handle cta_button_text → both CTA instances share the same baseline text
     if "cta_button_text" in challenger_copy:
-        cta_text = challenger_copy.pop("cta_button_text")
-        challenger_copy["cta_button_1"] = cta_text
-        challenger_copy["cta_button_2"] = cta_text
+        challenger_copy["cta_button_text"] = challenger_copy["cta_button_text"]
+        # The baseline text "Start Selling Today" appears twice; findAndReplace
+        # will match the first occurrence. We add the swap once — the script
+        # iterates all matching elements.
 
-    # Verify all challenger keys have corresponding selectors
-    for key in challenger_copy:
-        if key not in config["selectors"]:
-            log.warning(
-                "Challenger key '%s' has no CSS selector — will be ignored by ab-test.js",
-                key,
-            )
+    # Build swaps array
+    swaps = []
+    for key, new_text in challenger_copy.items():
+        # Map to baseline text
+        baseline_text = baseline_map.get(key)
+        if not baseline_text:
+            log.warning("Key '%s' not found in baseline.md — skipping", key)
+            continue
+        # Handle newlines in baseline (e.g. "Line One\nLine Two")
+        baseline_text = baseline_text.replace("\\n", "\n")
+        swaps.append({
+            "key": key,
+            "baseline": baseline_text,
+            "challenger": new_text,
+        })
 
-    config["experiment_id"] = challenger["experiment_id"]
-    config["started_at"] = datetime.now(timezone.utc).isoformat()
-    config["hypothesis"] = challenger["hypothesis"]
-    config["challenger"] = challenger_copy
+    config = {
+        "experiment_id": challenger["experiment_id"],
+        "started_at": datetime.now(timezone.utc).isoformat(),
+        "hypothesis": challenger["hypothesis"],
+        "swaps": swaps,
+    }
 
     if dry_run:
         log.info("DRY RUN — would deploy variant-config.json:")
@@ -644,7 +669,7 @@ def phase_deploy(challenger: dict, dry_run: bool = False):
 
     # Write variant config
     VARIANT_CONFIG_FILE.write_text(json.dumps(config, indent=2))
-    log.info("Updated variant-config.json with challenger.")
+    log.info("Updated variant-config.json with %d swaps.", len(swaps))
 
     # Save active experiment
     experiment = {
