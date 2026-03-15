@@ -1,9 +1,9 @@
 name: Landing Page Optimization
 
 on:
-  schedule:
-    - cron: "0 6 * * *"  # Daily at 6am UTC
-  workflow_dispatch:  # manual trigger
+  # schedule:
+  #   - cron: "0 6 * * *"  # Disabled — moved to Modal
+  workflow_dispatch:  # Keep manual trigger as backup
 
 permissions:
   contents: write

@@ -33,7 +33,8 @@
   function findAndReplace(baselineText, newText) {
     // Normalize whitespace for comparison
     var needle = baselineText.replace(/\s+/g, " ").trim();
-    var els = document.querySelectorAll("h1, h2, h3, div");
+    var els = document.querySelectorAll("h1, h2, h3, div, a");
+    var found = 0;
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
       // Match leaf-ish elements (skip containers with many children)
@@ -45,10 +46,10 @@
         } else {
           el.textContent = newText;
         }
-        return true;
+        found++;
       }
     }
-    return false;
+    return found > 0;
   }
 
   fetch(CONFIG_URL + "?t=" + Date.now())
