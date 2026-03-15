@@ -1,6 +1,12 @@
 # Baseline — /signup Landing Page Copy
 # Last updated: 2026-03-14
 # Source: Webflow Page Content API (page_id: 6993e2f675b9e00fcbdd8e88)
+#
+# ICP NOTE (2026-03-14): 85% of signups are NOT market vendors. They're social sellers
+# (Instagram/FB DMs) and farmstand/porch pickup operators. Future challengers MUST test
+# broader language that doesn't assume market participation. See data/resource.md for
+# 3-ICP framework. Priority elements to test with broader copy: mid_page_hook,
+# hero_headline, comparison_heading, section_setup_bullet_3.
 
 ## Hero Section
 
