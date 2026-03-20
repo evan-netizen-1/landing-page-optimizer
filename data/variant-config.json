@@ -1,27 +1,6 @@
 {
-  "experiment_id": "exp-2026-03-14",
-  "started_at": "2026-03-14T12:03:59.933900+00:00",
-  "hypothesis": "This experiment tests whether a LOSS AVERSION frame ('Stop Losing Sales') converts better than the current ENABLEMENT frame ('Let Your Customers Order Anytime') because loss aversion is ~2x more motivating than equivalent gains (Kahneman/Tversky), and these vendors already feel the pain of customers asking to order between markets \u2014 naming that lost revenue should create urgency to act. Secondary test: price-anchored CTA ('Get Your $10/mo Store') vs action-generic CTA ('Start Selling Today') to reduce perceived risk at the click moment.",
-  "swaps": [
-    {
-      "key": "hero_headline",
-      "baseline": "Let Your Customers Order From You Anytime",
-      "challenger": "Stop Losing Sales Between Markets"
-    },
-    {
-      "key": "hero_subheadline",
-      "baseline": "Set up a simple online storefront in minutes. Your customers browse your products, place orders, and pick up on your schedule.",
-      "challenger": "Your regulars already want to order online. A simple $10/mo storefront \u2014 live in 15 minutes."
-    },
-    {
-      "key": "mid_page_hook",
-      "baseline": "Your customers want to buy from you between markets. Now they can.",
-      "challenger": "Every market day ends. Your sales don\u2019t have to."
-    },
-    {
-      "key": "cta_button_text",
-      "baseline": "Start Selling Today",
-      "challenger": "Get Your $10/mo Store"
-    }
-  ]
+  "experiment_id": "paused",
+  "started_at": "2026-03-20T00:00:00+00:00",
+  "hypothesis": "Experiment paused. Manual copy update in progress.",
+  "swaps": []
 }
